@@ -1,4 +1,6 @@
-export function TodoList({ todos }){
+import { TodoItem } from "./TodoItem"
+
+export function TodoList({ todos, toggleTodo, deleteTodo }){
 
     return(
         <ul className="list">
@@ -6,13 +8,7 @@ export function TodoList({ todos }){
         {todos.length === 0 && "No Todos"}
         {todos.map(todo =>{
           return(
-            <li key={todo.id}>
-              <label htmlFor="check">
-                <input type="checkbox" checked={todo.completed} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
-                {todo.title}
-              </label>
-              <button onClick={() => deleteTodo(todo.id)} className="delete">Delete</button>
-            </li>
+            <TodoItem id={todo.id} completed={todo.completed} title={todo.title} key={todo.id} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
           )
         })}
       </ul>
